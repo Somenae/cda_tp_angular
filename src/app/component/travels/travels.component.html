@@ -1,0 +1,11 @@
+<div class="travels-container">
+    @for(travel of travels(); track travel.id) {
+        <div class="card">
+            {{ travel.imageUrl }}
+            {{ travel.title }}
+            {{ travel.destination }}
+            {{ travel.startDate }}
+            {{ travel.endDate }}
+        </div>
+    }
+</div>
