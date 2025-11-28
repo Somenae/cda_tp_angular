@@ -5,7 +5,7 @@ export interface TravelsResponse {
 }
 
 export interface Travel {
-    id: number,
+    id?: number,
     title: string,
     destination: string,
     description?: string,

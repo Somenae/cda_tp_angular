@@ -1,6 +1,19 @@
 import { Routes } from '@angular/router';
-import { TravelsComponent } from './component/travels/travels.component';
+import { HomeComponent } from './pages/home/home.component';
+import { TravelsDetailsComponent } from './pages/travel-details/travel-details.component';
 
 export const routes: Routes = [
-    { path: '', component: TravelsComponent }
+    { 
+        path: '',
+        component: HomeComponent,
+        title: 'Liste des voyages'
+    },
+    {
+        path: 'travel/:id',
+        component: TravelsDetailsComponent,
+    },
+    {
+        path: '**',
+        redirectTo: ''
+    },
 ];

@@ -1,26 +1,38 @@
-import { Component, inject, OnInit, signal } from "@angular/core";
+import { Component, computed, inject, input, signal } from "@angular/core";
+import { Travel } from "../../models/travel.model";
+import { Store } from "@ngrx/store";
+import { AppState } from "../../store";
+import { selectTravels } from "../../store/selectors/travels.selectors";
+import { StepsComponent } from "../steps/steps.component";
 import { TravelsService } from "../../services/travels/travels.service";
-import { Travel, TravelsResponse } from "../../models/travel.model";
 
 @Component({
-    selector: 'app-travels',
-    imports: [],
+    selector: 'app-travel',
+    imports: [StepsComponent],
     templateUrl: './travels.component.html',
     styleUrls: ['./travels.component.css']
 })
-export class TravelsComponent implements OnInit {
-    private readonly travelsService = inject(TravelsService);
-
-    protected travels = signal<Travel[]>([]);
-
-    ngOnInit(): void {
-        this.loadTravels();
+export class TravelsComponent {
+    travelId = input.required<number>();
+    travel = input.required<Travel>();
+    protected readonly travels = signal<Travel[]>([]);
+    protected readonly steps = computed(() => {
+        return this.travel()?.steps || [];
+    })
+    
+    private store = inject(Store<AppState>);
+    private travelsService = inject(TravelsService);
+    
+    constructor() {
+        /* this.store.select(selectTravels).subscribe(travels => {
+            this.travels.set(travels);
+        }); */
     }
 
-    loadTravels() {
-        this.travelsService.getTravels().subscribe({
+    deleteStep(stepId: number) {
+        this.travelsService.deleteStep(this.travelId()!, stepId).subscribe({
             next: (response) => {
-                this.travels.set(Object.values(response));
+                console.log(response);
             },
             error: (err) => {
                 console.log(err);

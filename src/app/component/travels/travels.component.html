@@ -1,11 +1,13 @@
-<div class="travels-container">
-    @for(travel of travels(); track travel.id) {
-        <div class="card">
-            {{ travel.imageUrl }}
-            {{ travel.title }}
-            {{ travel.destination }}
-            {{ travel.startDate }}
-            {{ travel.endDate }}
+@if(travel()) {
+    <h1>{{ travel().title }}</h1>
+    <p>{{ travel().description }}</p>
+    
+    @for(step of steps(); track step.id) {
+        <div class="step-card">
+            <div class="step-title">
+                <span (click)="deleteStep(step.id!)" class="delete-button">&#128465;</span>
+                <app-steps [step]="step" />
+            </div>
         </div>
     }
-</div>
+}

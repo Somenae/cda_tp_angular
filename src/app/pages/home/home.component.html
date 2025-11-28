@@ -1,0 +1,51 @@
+<div class="travels-container">
+    @for(travel of travels(); track travel.id) {
+        <div class="card">
+            <a href="/travel/{{ travel.id }}">
+                @if(travel.imageUrl) {
+                    <img 
+                    src="http://localhost:3000{{ travel.imageUrl }}" 
+                    alt="placeholder"
+                    />
+                }
+                {{ travel.title }}
+                {{ travel.destination }}
+                {{ travel.startDate }}
+                {{ travel.endDate }}
+            </a>
+            <span (click)="deleteTravel(travel.id!)" class="delete-button">&#128465;</span>
+        </div>
+    }
+</div>
+<div class="form-container">
+        <h2>Ajouter un voyage</h2>
+        <form [formGroup]="travelForm" (ngSubmit)="addTravel()" class="travel-form" method="post">
+            <input 
+                type="text"
+                formControlName="title"
+                placeholder="Titre du voyage"
+            />
+            <input 
+                type="text"
+                formControlName="destination"
+                placeholder="Destination"
+            />
+            <textarea 
+                formControlName="description"
+                placeholder="Description du voyage"
+            ></textarea>
+            <label for="startDate">Date de début</label>
+            <input 
+                type="date"
+                formControlName="startDate"
+                id="startDate"
+            />
+            <label for="endDate">Date de fin</label>
+            <input 
+                type="date"
+                formControlName="endDate"
+                id="endDate"
+            />
+            <button type="submit">Ajouter</button>
+        </form>
+</div>

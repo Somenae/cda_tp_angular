@@ -1,0 +1,18 @@
+<app-travel [travelId]="travelId()!" [travel]="travel()!" />
+
+<div class="form-container">
+    <h2>Ajouter une étape</h2>
+    <form [formGroup]="stepForm" (ngSubmit)="addStep(travelId()!)" class="travel-form" method="post">
+        <input 
+            type="text"
+            formControlName="name"
+            placeholder="Nom de l'étape"
+        />
+        <input 
+            type="number"
+            formControlName="order"
+            placeholder="Numéro d'étape"
+        />
+        <button type="submit">Ajouter</button>
+    </form>
+</div>
