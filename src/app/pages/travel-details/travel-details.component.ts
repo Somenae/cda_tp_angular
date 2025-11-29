@@ -15,6 +15,8 @@ import { Step } from "../../models/step.model";
     styleUrls: ['./travel-details.component.css'],
 })
 export class TravelsDetailsComponent implements OnInit {
+    stepDeleteId: number = 0;
+
     protected readonly travelId = signal<number | null>(null);
     protected readonly travels = signal<Travel[]>([]);
 
@@ -76,5 +78,16 @@ export class TravelsDetailsComponent implements OnInit {
                 }
             });
         }
+    }
+
+    deleteStep(stepId: number) {
+        this.travelsService.deleteStep(this.travelId()!, stepId).subscribe({
+            next: (response) => {
+                this.loadTravel();
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        })
     }
 }

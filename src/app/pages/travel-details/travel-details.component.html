@@ -1,4 +1,4 @@
-<app-travel [travelId]="travelId()!" [travel]="travel()!" />
+<app-travel [travelId]="travelId()!" [travel]="travel()!" (stepDeleteId)="deleteStep($event)" />
 
 <div class="form-container">
     <h2>Ajouter une étape</h2>

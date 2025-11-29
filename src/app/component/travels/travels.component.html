@@ -1,7 +1,12 @@
 @if(travel()) {
-    <h1>{{ travel().title }}</h1>
-    <p>{{ travel().description }}</p>
-    
+    <div class="page-title">
+        <div class="title-container">
+            <h1>{{ travel().title }}</h1>
+            <p>{{ travel().description }}</p>
+        </div>
+    </div>
+    <a href="/home">← Accueil</a>
+    <div class="steps-list">
     @for(step of steps(); track step.id) {
         <div class="step-card">
             <div class="step-title">
@@ -10,4 +15,5 @@
             </div>
         </div>
     }
+    </div>
 }
